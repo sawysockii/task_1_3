@@ -5,11 +5,22 @@ roman_coding = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (
 
 def arabic_to_roman(input_number):
     arabic_string = ''
+    while input_number > 0:
+        for i in range(0,len(roman_coding)):
+            while input_number - roman_coding[i][0] >= 0:
+                arabic_string += roman_coding[i][1]
+                input_number -= roman_coding[i][0]
+                print(input_number)
     return(arabic_string)
 
-input_ = input('Введите арабское число: ')
-while input_ != 'exit' or input_ != 'quit'
-    if isdigit(input_):
-        output_ = arabic_to_roman(input_)
+run = True
+while run:
+    input_ = input('Введите арабское число: ')
+    if input_.isdigit():
+        print(arabic_to_roman(int(input_)))
+    elif input_ == 'exit' or input_ == 'quit':
+        print('Счастливо!')
+        break
     else:
-        print('Это не арабское число...')
+        print('Это не арабское число, попробуйте еще раз')
+        print(len(roman_coding))
