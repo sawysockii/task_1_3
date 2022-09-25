@@ -6,6 +6,7 @@ import tqdm
 
 url_main = 'https://spb.hh.ru/search/vacancy?area=113&text=python+разработчик'
 postfix = ['&experience=noExperience','&experience=between1And3','&experience=between3And6','&experience=moreThan6']
+postfix_translated = ['без опыта', 'от 1 до 3 лет', 'от 3 до 6 лет', 'более 6 лет']
 
 sess = req.Session()
 sess.headers.update({
@@ -49,7 +50,7 @@ for i in range(0,4):
             else:
                 vacancy_salary = 'не указано'
             vacancy_location = str.split(vacancy.find(attrs={"data-qa":"vacancy-serp__vacancy-address"}).text)[0]
-            data["data"].append({"Title":vacancy_name,"Salary":vacancy_salary,"Region":vacancy_location})
+            data["data"].append({"Title":vacancy_name,"Salary":vacancy_salary,"Region":vacancy_location,"Experience":postfix_translated[i]})
 
 with open("data.json","w") as file:
     json.dump(data,file,ensure_ascii=False)
