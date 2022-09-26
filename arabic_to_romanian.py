@@ -23,4 +23,3 @@ while run:
         break
     else:
         print('Это не арабское число, попробуйте еще раз')
-        print(len(roman_coding))

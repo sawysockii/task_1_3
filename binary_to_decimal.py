@@ -1,26 +1,45 @@
 from curses.ascii import isdigit
 
-
-roman_coding = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
-
-def arabic_to_roman(input_number):
-    arabic_string = ''
-    while input_number > 0:
-        for i in range(0,len(roman_coding)):
-            while input_number - roman_coding[i][0] >= 0:
-                arabic_string += roman_coding[i][1]
-                input_number -= roman_coding[i][0]
-                print(input_number)
-    return(arabic_string)
+def only_binary_in_string(input_string):
+    is_binary = 1
+    if len(str(input_string)) > 0:
+        for char_i in str(input_string):
+            if char_i == '1' or char_i == '0':
+                is_binary *= 1
+            else:
+                is_binary *= 0
+        if is_binary == 1:
+            return(True)
+        else:
+            return(False)
+    else:
+        return(False)
+1
+def binary_to_decimal(input_number):
+    decimal = 0
+    for i in range(0,len(input_number)):
+        decimal += int(input_number[i])*2**(len(input_number) - 1 - i)
+    return(decimal)
 
 run = True
 while run:
-    input_ = input('Введите арабское число: ')
-    if input_.isdigit():
-        print(arabic_to_roman(int(input_)))
-    elif input_ == 'exit' or input_ == 'quit':
+    first_binary = input('Введите первое двоичное число: ')
+    second_binary = input('Введите второе двоичное число: ')
+    if only_binary_in_string(first_binary) and only_binary_in_string(second_binary):
+        result_decimal = binary_to_decimal(first_binary) * binary_to_decimal(second_binary)
+        # degree = 0 
+        # result_ = result_decimal
+        # while result_ > 1:
+        #     result_ /= 2
+        #     degree += 1 # зачем-то мы выяснили степень двойки старшего разряда...
+        result_binary_string = ''
+        remains = result_decimal
+        while ((remains//2 >= 1) or (remains%2 >= 1)):
+            result_binary_string += str(remains%2)
+            remains //= 2
+        print('Результат умножения: ', result_binary_string[::-1])
+    elif (first_binary == 'exit' or first_binary == 'quit') or (second_binary == 'exit' or second_binary == 'quit'):
         print('Счастливо!')
         break
     else:
-        print('Это не арабское число, попробуйте еще раз')
-        print(len(roman_coding))
+        print('Это не двоичные числа, попробуйте еще раз')
