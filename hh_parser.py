@@ -4,7 +4,7 @@ import time
 import json
 import tqdm
 
-url_main = 'https://spb.hh.ru/search/vacancy?area=113&text=python+разработчик'
+url_main = 'https://spb.hh.ru/search/vacancy?area=113&text=python+разработчик&items_on_page=15'
 postfix = ['&experience=noExperience','&experience=between1And3','&experience=between3And6','&experience=moreThan6']
 postfix_translated = ['без опыта', 'от 1 до 3 лет', 'от 3 до 6 лет', 'более 6 лет']
 
@@ -36,7 +36,7 @@ for i in range(0,len(postfix_translated)):
     pages = soup.find_all(attrs={"data-qa":"pager-page"})
     final_page = int(pages[-1].text)+1
     for page in tqdm.tqdm(range(0,final_page)):
-        time.sleep(7)
+        time.sleep(2)
         new_url = url + f'&page={page}'
         response_new = sess.get(new_url)
         soup_new = BeautifulSoup(response_new.text,"lxml")
