@@ -29,15 +29,14 @@ sess.headers.update({
 
 data = {"data":[]}
 
-for i in range(0,4):
+for i in range(0,len(postfix_translated)):
     url = url_main + postfix[i]
     response = sess.get(url)
     soup = BeautifulSoup(response.text,"lxml")
     pages = soup.find_all(attrs={"data-qa":"pager-page"})
     final_page = int(pages[-1].text)+1
-    time.sleep(2)
     for page in tqdm.tqdm(range(0,final_page)):
-        time.sleep(2)
+        time.sleep(7)
         new_url = url + f'&page={page}'
         response_new = sess.get(new_url)
         soup_new = BeautifulSoup(response_new.text,"lxml")
@@ -52,5 +51,5 @@ for i in range(0,4):
             vacancy_location = str.split(vacancy.find(attrs={"data-qa":"vacancy-serp__vacancy-address"}).text)[0]
             data["data"].append({"Title":vacancy_name,"Salary":vacancy_salary,"Region":vacancy_location,"Experience":postfix_translated[i]})
 
-with open("data.json","a+") as file:
+with open("data.json","w") as file:
     json.dump(data,file,ensure_ascii=False)
