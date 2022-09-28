@@ -4,7 +4,7 @@ import time
 import json
 import tqdm
 
-url_main = 'https://spb.hh.ru/search/vacancy?area=113&text=python+разработчик&items_on_page=15'
+url_main = 'https://spb.hh.ru/search/vacancy?area=113&text=python+разработчик&items_on_page=20'
 postfix = ['&experience=noExperience','&experience=between1And3','&experience=between3And6','&experience=moreThan6']
 postfix_translated = ['без опыта', 'от 1 до 3 лет', 'от 3 до 6 лет', 'более 6 лет']
 
