@@ -52,5 +52,5 @@ for i in range(0,4):
             vacancy_location = str.split(vacancy.find(attrs={"data-qa":"vacancy-serp__vacancy-address"}).text)[0]
             data["data"].append({"Title":vacancy_name,"Salary":vacancy_salary,"Region":vacancy_location,"Experience":postfix_translated[i]})
 
-with open("data.json","w") as file:
+with open("data.json","a+") as file:
     json.dump(data,file,ensure_ascii=False)
